@@ -1,0 +1,116 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="ELibrary2.Site1" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+
+    <%-- Custom Css --%>
+    <link href="css/customstyles.css" rel="stylesheet" />
+    <%-- Bootstrap css --%>
+    <link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <%-- datatables css --%>
+    <link href="datatables/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <%-- fontawesome css --%>
+    <link href="fontawesome/css/all.css" rel="stylesheet" />
+
+    <%-- jquery --%>
+    <script src="Bootstrap/js/jquery-3.5.1.slim.min.js"></script>
+    <%-- popper --%>
+    <script src="Bootstrap/js/popper.min.js"></script>
+    <%-- bootstrap js --%>
+    <script src="Bootstrap/js/bootstrap.min.js"></script>
+    <%-- Datatables js --%>
+    <script src="datatables/js/jquery.dataTables.min.js"></script>
+
+    <title>E Library</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="bg-dark">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark container">
+                <a class="navbar-brand" href="#">
+                    <img src="imgs/boom.png" width="30" height="30" />
+                    <b class="font-italic">Smyt</b>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Home</span></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">About Us</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Terms</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <asp:LinkButton CssClass="nav-link" ID="LinkButtonViewBooks" runat="server" OnClick="LinkButtonViewBooks_Click">View Books</asp:LinkButton>
+                        </li>
+                        <li class="nav-item active">
+                            <asp:LinkButton CssClass="nav-link" ID="LinkButtonUserLogin" runat="server" OnClick="LinkButtonUserLogin_Click">User Login</asp:LinkButton>
+                        </li>
+                        <li class="nav-item active">
+                            <asp:LinkButton CssClass="nav-link" ID="LinkButtonSignUp" runat="server" OnClick="LinkButtonSignUp_Click">Sign Up</asp:LinkButton>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <asp:LinkButton class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" runat="server" Visible="False">Hello, User</asp:LinkButton>
+                            <div class="dropdown-menu bg-info" aria-labelledby="navbarDropdown">
+                                <asp:LinkButton CssClass="dropdown-item" ID="LinkButtonProfile" runat="server" OnClick="LinkButtonProfile_Click">Profile</asp:LinkButton>
+                                <div class="dropdown-divider"></div>
+                                <asp:LinkButton CssClass="dropdown-item" ID="LinkButtonLogout" runat="server" OnClick="LinkButtonLogout_Click">Logout</asp:LinkButton>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        <%-- Main Content Holder --%>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+        <%-- End of Main Content Holder --%>
+
+        <footer>
+            <div id="footer1" class="container-fluid">
+                <div class="row pt-3">
+                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                        <p>
+                            <asp:LinkButton CssClass="footerlinks" ID="LinkButtonAdminLogin" runat="server" OnClick="LinkButtonAdminLogin_Click">Admin Login</asp:LinkButton>
+                            &nbsp;
+                            <asp:LinkButton CssClass="footerlinks" ID="LinkButtonAuthorManagement" runat="server" OnClick="LinkButtonAuthorManagement_Click" Visible="False">Author Management</asp:LinkButton>
+                            &nbsp;
+                            <asp:LinkButton CssClass="footerlinks" ID="LinkButtonPublisherManagement" runat="server" OnClick="LinkButtonPublisherManagement_Click" Visible="False">Publisher Management</asp:LinkButton>
+                            &nbsp;
+                            <asp:LinkButton CssClass="footerlinks" ID="LinkButtonBookInventory" runat="server" OnClick="LinkButtonBookInventory_Click" Visible="False">Book Inventory</asp:LinkButton>
+                            &nbsp;
+                            <asp:LinkButton CssClass="footerlinks" ID="LinkButtonBookIssuing" runat="server" OnClick="LinkButtonBookIssuing_Click" Visible="False">Book Issuing</asp:LinkButton>
+                            &nbsp;
+                            <asp:LinkButton CssClass="footerlinks" ID="LinkButtonMemberManagement" runat="server" OnClick="LinkButtonMemberManagement_Click" Visible="False">Member Management</asp:LinkButton>
+                            &nbsp;
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div id="footer2" class="container-fluid">
+                <div class="row pt-3">
+                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                        <p>
+                            &copy; All Rights Reserved.
+                            <asp:LinkButton CssClass="footerlinks" ID="LinkButton7" runat="server">Simple Snippets</asp:LinkButton>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </form>
+</body>
+</html>

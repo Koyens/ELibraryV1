@@ -1,0 +1,15 @@
+﻿.footerlinks {
+    color: white;
+    transition: all 0.8s ease-in-out;
+}
+.footerlinks:hover {
+    text-decoration: none;
+    opacity: 0.5;
+    color: yellow;
+}
+#footer1 {
+    background: #b75e5e;
+}
+#footer2 {
+    background: #a87e7e;
+}
