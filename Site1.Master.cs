@@ -69,7 +69,7 @@ namespace ELibrary2
 
         protected void LinkButtonViewBooks_Click(object sender, EventArgs e)
         {
-            Response.Redirect("adminBookInventory.aspx");
+            Response.Redirect("viewBooks.aspx");
         }
 
         protected void LinkButtonAdminLogin_Click(object sender, EventArgs e)

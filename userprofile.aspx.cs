@@ -26,7 +26,7 @@ namespace ELibrary2
                 Response.Write("<script>alert('Session Expired! Login Again!');</script>");
                 Response.Redirect("userlogin.aspx");
             }
-            else
+            else if(!IsPostBack)
             {
                 model.memberID = Session["username"].ToString().Trim();
                 jsonstring = JsonConvert.SerializeObject(model);
@@ -43,10 +43,10 @@ namespace ELibrary2
                 TextBoxUserID.Text = table.Rows[0]["member_id"].ToString();
                 TextBoxOldPassword.Text = table.Rows[0]["password"].ToString();
                 LabelStatus.Text = Session["accountstatus"].ToString();
-
-                GridView1.DataSource = issueBook.getIssueDetailsByID(Session["username"].ToString());
-                GridView1.DataBind();
             }
+
+            GridView1.DataSource = issueBook.getIssueDetailsByID(Session["username"].ToString());
+            GridView1.DataBind();
         }
 
         void serialize()
@@ -81,39 +81,47 @@ namespace ELibrary2
 
         protected void ButtonUpdateProfile_Click(object sender, EventArgs e)
         {
-            serialize();
-
-            int result = member.updateMember(jsonstring);
-
-            if(result == 0)
+            if(Session["accountstatus"].ToString() != "Active")
             {
-                Response.Write("<script>alert('UPDATE QUERY FAILED!');</script>");
-            }
-            else if(result == 1)
-            {
-                if(TextBoxNewPassword.Text != "")
-                {
-                    TextBoxOldPassword.Text = TextBoxNewPassword.Text.ToString();
-                    TextBoxNewPassword.Text = "";
-                }
-                Response.Write("<script>alert('UPDATED SUCCESSFULLY!');</script>");
-
-            }
-            else if(result == 2)
-            {
-                Response.Write("<script>alert('Missing Field!');</script>");
-            }
-            else if(result == 3)
-            {
-                Response.Write("<script>alert('Full Name Already Taken!');</script>");
-            }
-            else if(result == 4)
-            {
-                Response.Write("<script>alert('Date must not be greater than today!');</script>");
+                Response.Write("<script>alert('You cannot edit your account because your account status is not active!');</script>");
             }
             else
             {
-                Response.Write("<script>alert('Try Catch Error!');</script>");
+                serialize();
+
+                int result = member.updateMember(jsonstring);
+
+                if (result == 0)
+                {
+                    Response.Write("<script>alert('UPDATE QUERY FAILED!');</script>");
+                }
+                else if (result == 1)
+                {
+                    if (TextBoxNewPassword.Text != "")
+                    {
+                        TextBoxOldPassword.Text = TextBoxNewPassword.Text.ToString();
+                        TextBoxNewPassword.Text = "";
+                    }
+                    Response.Write("<script>alert('UPDATED SUCCESSFULLY!');</script>");
+                    GridView1.DataSource = issueBook.getIssueDetailsByID(Session["username"].ToString());
+                    GridView1.DataBind();
+                }
+                else if (result == 2)
+                {
+                    Response.Write("<script>alert('Missing Field!');</script>");
+                }
+                else if (result == 3)
+                {
+                    Response.Write("<script>alert('Full Name Already Taken!');</script>");
+                }
+                else if (result == 4)
+                {
+                    Response.Write("<script>alert('Date must not be greater than today!');</script>");
+                }
+                else
+                {
+                    Response.Write("<script>alert('Try Catch Error!');</script>");
+                }
             }
         }
     }

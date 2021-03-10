@@ -42,6 +42,7 @@ namespace ELibrary2.Classes
                             adapt.Fill(dt);
 
                             HttpContext.Current.Session["fullname"] = dt.Rows[0]["full_name"].ToString();
+                            HttpContext.Current.Session["username"] = "";
                             HttpContext.Current.Session["role"] = "admin";
                         }
 

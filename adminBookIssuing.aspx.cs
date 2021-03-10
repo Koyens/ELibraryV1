@@ -121,6 +121,14 @@ namespace ELibrary2
             {
                 Response.Write("<script>alert('Member already have this book!');</script>");
             }
+            else if(result == 9)
+            {
+                Response.Write("<script>alert('Check member status!');</script>");
+            }
+            else if(result == 10)
+            {
+                Response.Write("<script>alert('You cannot issue book because you have an unreturned book!');</script>");
+            }
             else if(result == 500)
             {
                 Response.Write("<script>alert('Try catch Error!');</script>");
@@ -157,6 +165,10 @@ namespace ELibrary2
             else if(result == 4)
             {
                 Response.Write("<script>alert('You have not borrowed this book!');</script>");
+            }
+            else if(result == 400)
+            {
+                Response.Write("<script>alert('Your account status is still pending!');</script>");
             }
             else
             {

@@ -155,27 +155,34 @@ namespace ELibrary2.Classes
         {
             try
             {
-                m = JsonConvert.DeserializeObject<issueBookModels>(modelstring);
-
-                using (con = new SqlConnection(strcon))
+                if (HttpContext.Current.Session["accountstatus"] == "pending")
                 {
-                    using (SqlCommand cmd = new SqlCommand("IssueBook",con))
+                    return 400;
+                }
+                else
+                {
+                    m = JsonConvert.DeserializeObject<issueBookModels>(modelstring);
+
+                    using (con = new SqlConnection(strcon))
                     {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@book_id", m.bookID.Trim());
-                        cmd.Parameters.AddWithValue("@member_id", m.memberID.Trim());
-                        cmd.Parameters.AddWithValue("@full_name", m.memberName.Trim());
-                        cmd.Parameters.AddWithValue("@book_name", m.bookName.Trim());
-                        cmd.Parameters.AddWithValue("@issue_date", m.issueDate.Trim());
-                        cmd.Parameters.AddWithValue("@due_date", m.dueDate.Trim());
+                        using (SqlCommand cmd = new SqlCommand("IssueBook", con))
+                        {
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@book_id", m.bookID.Trim());
+                            cmd.Parameters.AddWithValue("@member_id", m.memberID.Trim());
+                            cmd.Parameters.AddWithValue("@full_name", m.memberName.Trim());
+                            cmd.Parameters.AddWithValue("@book_name", m.bookName.Trim());
+                            cmd.Parameters.AddWithValue("@issue_date", m.issueDate.Trim());
+                            cmd.Parameters.AddWithValue("@due_date", m.dueDate.Trim());
 
-                        var output = cmd.Parameters.Add("@Return", SqlDbType.Int);
-                        output.Direction = ParameterDirection.Output;
-                        con.Open();
-                        cmd.ExecuteNonQuery();
-                        con.Close();
+                            var output = cmd.Parameters.Add("@Return", SqlDbType.Int);
+                            output.Direction = ParameterDirection.Output;
+                            con.Open();
+                            cmd.ExecuteNonQuery();
+                            con.Close();
 
-                        return Convert.ToInt32(output.Value);
+                            return Convert.ToInt32(output.Value);
+                        }
                     }
                 }
             }
