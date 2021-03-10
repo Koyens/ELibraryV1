@@ -22,4 +22,14 @@ namespace ELibrary2.models
         public string bookDescription { get; set; }
         public string bookLink { get; set; }
     }
+
+    public class issueBookModels
+    {
+        public string memberID { get; set; }
+        public string bookID { get; set; }
+        public string memberName { get; set; }
+        public string bookName { get; set; }
+        public string issueDate { get; set; }
+        public string dueDate { get; set; }
+    }
 }

@@ -51,6 +51,7 @@ namespace ELibrary2
                 LinkButtonBookInventory.Visible = true;
                 LinkButtonBookIssuing.Visible = true;
                 LinkButtonMemberManagement.Visible = true;
+                LinkButtonProfile.Visible = false;
 
                 navbarDropdown.Text = "Hello, " + Session["fullname"].ToString();
             }
@@ -110,6 +111,7 @@ namespace ELibrary2
         {
             Session["role"] = null;
             Session["fullname"] = "";
+            Session["username"] = "";
             Session["accountstatus"] = "";
             Response.Redirect("homepage.aspx");
         }

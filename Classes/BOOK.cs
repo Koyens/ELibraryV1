@@ -144,4 +144,120 @@ namespace ELibrary2.Classes
             }
         }
     }
+
+    public class ISSUE_BOOK
+    {
+        issueBookModels m = new issueBookModels();
+        string strcon = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
+        SqlConnection con;
+
+        public int issueBook(string modelstring)
+        {
+            try
+            {
+                m = JsonConvert.DeserializeObject<issueBookModels>(modelstring);
+
+                using (con = new SqlConnection(strcon))
+                {
+                    using (SqlCommand cmd = new SqlCommand("IssueBook",con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@book_id", m.bookID.Trim());
+                        cmd.Parameters.AddWithValue("@member_id", m.memberID.Trim());
+                        cmd.Parameters.AddWithValue("@full_name", m.memberName.Trim());
+                        cmd.Parameters.AddWithValue("@book_name", m.bookName.Trim());
+                        cmd.Parameters.AddWithValue("@issue_date", m.issueDate.Trim());
+                        cmd.Parameters.AddWithValue("@due_date", m.dueDate.Trim());
+
+                        var output = cmd.Parameters.Add("@Return", SqlDbType.Int);
+                        output.Direction = ParameterDirection.Output;
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+
+                        return Convert.ToInt32(output.Value);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                con.Close();
+                return 500;
+            }
+            finally
+            {
+                con.Dispose();
+            }
+        }
+
+        public int returnBook(string modelstring)
+        {
+            try
+            {
+                m = JsonConvert.DeserializeObject<issueBookModels>(modelstring);
+
+                using (con = new SqlConnection(strcon))
+                {
+                    using (SqlCommand cmd = new SqlCommand("ReturnBook",con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@member_id", m.memberID.Trim());
+                        cmd.Parameters.AddWithValue("@book_id", m.bookID.Trim());
+                        cmd.Parameters.AddWithValue("@member_name", m.memberName.Trim());
+                        cmd.Parameters.AddWithValue("@book_name", m.bookName.Trim());
+
+                        var output = cmd.Parameters.Add("@Return", SqlDbType.Int);
+                        output.Direction = ParameterDirection.Output;
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+
+                        return Convert.ToInt32(output.Value);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                con.Close();
+                throw;
+            }
+            finally
+            {
+                con.Dispose();
+            }
+        }
+
+        public DataTable getIssueDetailsByID(string id)
+        {
+            try
+            {
+                using (con = new SqlConnection(strcon))
+                {
+                    using (SqlCommand cmd = new SqlCommand("GetIssueDetailsByID",con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@member_id", id.Trim());
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+
+                        DataTable dt = new DataTable();
+                        SqlDataAdapter adapt = new SqlDataAdapter(cmd);
+                        adapt.Fill(dt);
+
+                        return dt;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                con.Close();
+                return null;
+            }
+            finally
+            {
+                con.Dispose();
+            }
+        }
+    }
 }

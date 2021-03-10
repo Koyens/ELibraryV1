@@ -41,13 +41,13 @@
                                         <div class="col-xl-6">
                                             <div class="form-group">
                                                 <label>Full Name</label>
-                                                <asp:TextBox CssClass="form-control" Text="Sir Marc Gwapo" ReadOnly="true" ID="TextBoxFullName" runat="server"></asp:TextBox>
+                                                <asp:TextBox CssClass="form-control" ID="TextBoxFullName" runat="server"></asp:TextBox>
                                             </div>
                                         </div>
                                         <div class="col-xl-6">
                                             <div class="form-group">
                                                 <label>Date of Birth</label>
-                                                <asp:TextBox CssClass="form-control" TextMode="Date" ReadOnly="true" ID="TextBox1" runat="server"></asp:TextBox>
+                                                <asp:TextBox CssClass="form-control" TextMode="Date" ID="TextBoxBirthdate" runat="server"></asp:TextBox>
                                             </div>
                                         </div>
                                     </div>
@@ -55,13 +55,13 @@
                                         <div class="col-xl-6">
                                             <div class="form-group">
                                                 <label>Contact Number</label>
-                                                <asp:TextBox CssClass="form-control" TextMode="Number" Text="09957591650" ReadOnly="true" ID="TextBoxContactNumber" runat="server"></asp:TextBox>
+                                                <asp:TextBox CssClass="form-control" TextMode="Number" ID="TextBoxContactNumber" runat="server"></asp:TextBox>
                                             </div>
                                         </div>
                                         <div class="col-xl-6">
                                             <div class="form-group">
                                                 <label>Email</label>
-                                                <asp:TextBox CssClass="form-control" TextMode="Email" Text="mckoy.yekz@gmail.com" ReadOnly="true" ID="TextBoxEmail" runat="server"></asp:TextBox>
+                                                <asp:TextBox CssClass="form-control" TextMode="Email" ID="TextBoxEmail" runat="server"></asp:TextBox>
                                             </div>
                                         </div>
                                     </div>
@@ -69,7 +69,7 @@
                                         <div class="col-xl-4">
                                             <div class="form-group">
                                                 <label>State</label>
-                                                <asp:DropDownList CssClass="form-control" ID="DropDownListState" ReadOnly="true" runat="server">
+                                                <asp:DropDownList CssClass="form-control" ID="DropDownListState" runat="server">
                                                     <asp:ListItem Text="Select" Value="Select"></asp:ListItem>
                                                     <asp:ListItem Text="Banilad" Value="Banilad"></asp:ListItem>
                                                     <asp:ListItem Text="Talamban" Value="Talamban"></asp:ListItem>
@@ -80,13 +80,13 @@
                                         <div class="col-xl-4">
                                             <div class="form-group">
                                                 <label>City</label>
-                                                <asp:TextBox CssClass="form-control" Text="Valhalla" ReadOnly="true" ID="TextBoxCity" runat="server"></asp:TextBox>
+                                                <asp:TextBox CssClass="form-control" ID="TextBoxCity" runat="server"></asp:TextBox>
                                             </div>
                                         </div>
                                         <div class="col-xl-4">
                                             <div class="form-group">
                                                 <label>Zip Code</label>
-                                                <asp:TextBox CssClass="form-control" Text="6000" ReadOnly="true" ID="TextBoxCode" runat="server"></asp:TextBox>
+                                                <asp:TextBox CssClass="form-control" TextMode="Number" ID="TextBoxCode" runat="server"></asp:TextBox>
                                             </div>
                                         </div>
                                     </div>
@@ -94,7 +94,7 @@
                                         <div class="col">
                                             <div class="form-group">
                                                 <label>Full Address</label>
-                                                <asp:TextBox CssClass="form-control" Text="A. Tormis St., Cebu City" ReadOnly="true" ID="TextBoxAddress" TextMode="MultiLine" runat="server"></asp:TextBox>
+                                                <asp:TextBox CssClass="form-control" ID="TextBoxAddress" TextMode="MultiLine" runat="server"></asp:TextBox>
                                             </div>
                                         </div>
                                     </div>
@@ -146,7 +146,7 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                                                            <asp:Button CssClass="btn btn-primary" ID="ButtonYes" runat="server" Text="Yes" />
+                                                            <asp:Button CssClass="btn btn-primary" ID="ButtonUpdateProfile" runat="server" Text="Yes" OnClick="ButtonUpdateProfile_Click" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -192,7 +192,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col">
-                                            <asp:GridView CssClass="table table-striped table-bordered" ID="GridView1" runat="server">
+                                            <asp:GridView CssClass="table table-striped table-bordered" ID="GridView1" runat="server" OnRowDataBound="GridView1_RowDataBound">
                                             </asp:GridView>
                                         </div>
                                     </div>
